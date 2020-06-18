@@ -21,32 +21,35 @@ file_list = ['info_1.txt', 'info_2.txt', 'info_3.txt']
 
 def get_data(file_list):
     main_data = [['Изготовитель системы', 'Название ОС', 'Код продукта', 'Тип системы'],]
-    create_system = []
-    name_os = []
-    code_prod = []
-    sys_type = []
 
     for item in file_list:
+        data = []
+        create_system = []
+        name_os = []
+        code_prod = []
+        sys_type = []
+
         with open(item) as file:
             for line in file:
-                data_1 = re.findall(r'^Изготовитель системы:\s+(.+$)', line)
-                data_2 = re.findall(r'^Название ОС:\s+(.+$)', line)
-                data_3 = re.findall(r'^Код продукта:\s+(.+$)', line)
-                data_4 = re.findall(r'^Тип системы:\s+(.+$)', line)
-                
-                if data_1:
-                    create_system.append(*data_1)
-                elif data_2:
-                    name_os.append(*data_2)
-                elif data_3:
-                    code_prod.append(*data_3)
-                elif data_4:
-                    sys_type.append(*data_4)           
+                spam = re.findall(r'^Изготовитель системы:\s+(.+$)', line)
+                if spam:
+                    create_system.append(*spam)
+                spam = re.findall(r'^Название ОС:\s+(.+$)', line)
+                if spam:
+                    name_os.append(*spam)
+                spam = re.findall(r'^Код продукта:\s+(.+$)', line)
+                if spam:
+                    code_prod.append(*spam)
+                spam = re.findall(r'^Тип системы:\s+(.+$)', line)
+                if spam:
+                    sys_type.append(*spam)
 
-    main_data.append(create_system)
-    main_data.append(name_os) 
-    main_data.append(code_prod) 
-    main_data.append(sys_type)
+            data.append(*create_system)
+            data.append(*name_os)
+            data.append(*code_prod)
+            data.append(*sys_type)
+
+            main_data.append(data)
 
     with open('main_data.txt', 'w') as main_file:
         main_file.write(str(main_data))
@@ -61,8 +64,5 @@ def write_to_csv(file_name):
             csv_file.writerow(line)
 
 
-
-
 if __name__ == "__main__":
-    # get_data(file_list)
     write_to_csv('file_csv.csv')
