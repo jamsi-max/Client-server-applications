@@ -16,23 +16,15 @@
 import csv
 import re
 
+
 file_list = ['info_1.txt', 'info_2.txt', 'info_3.txt']
 
-
-def write_file(data_list):
-    with open('main_data.txt', 'a') as file:
-        for item in data_list:
-            file.write(item)
-        file.write('\n')
-
-
 def get_data(file_list):
-    main_data = [['Изготовитель системы', 'Название ОС', 'Код продукта', 'Тип системы']]
+    main_data = [['Изготовитель системы', 'Название ОС', 'Код продукта', 'Тип системы'],]
     create_system = []
     name_os = []
     code_prod = []
     sys_type = []
-    data = []
 
     for item in file_list:
         with open(item) as file:
@@ -41,7 +33,7 @@ def get_data(file_list):
                 data_2 = re.findall(r'^Название ОС:\s+(.+$)', line)
                 data_3 = re.findall(r'^Код продукта:\s+(.+$)', line)
                 data_4 = re.findall(r'^Тип системы:\s+(.+$)', line)
-            
+                
                 if data_1:
                     create_system.append(*data_1)
                 elif data_2:
@@ -49,30 +41,28 @@ def get_data(file_list):
                 elif data_3:
                     code_prod.append(*data_3)
                 elif data_4:
-                    sys_type.append(*data_4)                
+                    sys_type.append(*data_4)           
 
-        main_data.append(create_system)
-        main_data.append(name_os) 
-        main_data.append(code_prod) 
-        main_data.append(sys_type)
-    print(main_data)        
-        
-                 
+    main_data.append(create_system)
+    main_data.append(name_os) 
+    main_data.append(code_prod) 
+    main_data.append(sys_type)
 
-    # write_file(main_data)
-    # write_file(create_system)
-    # write_file(name_os)
-    # write_file(code_prod)
-    # write_file(sys_type)
-
-    return 'main_data.txt'
+    with open('main_data.txt', 'w') as main_file:
+        main_file.write(str(main_data))
+    
+    return main_data
 
 
-# def write_to_csv(csv_file):
+def write_to_csv(file_name):
+    with open(file_name, 'w') as file:
+        csv_file = csv.writer(file)
+        for line in get_data(file_list):
+            csv_file.writerow(line)
 
 
 
 
 if __name__ == "__main__":
-    get_data(file_list)
-    # write_to_csv(get_data(file_list))
+    # get_data(file_list)
+    write_to_csv('file_csv.csv')
