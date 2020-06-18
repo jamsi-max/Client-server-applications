@@ -8,14 +8,26 @@
 # стилизацию файла с помощью параметра default_flow_style, а также установить возможность работы 
 # с юникодом: allow_unicode = True;
 # * Реализовать считывание данных из созданного файла и проверить, совпадают ли они с исходными.
+import yaml
 
 data = {
-    1: [],
-    2: 12,
+    1: ['apple', 'orange', 'melone'],
+    2: 222,
     3: {
-        1
+        '\u2606': ('a', 'b', 'c'),
+        '\u2668': [1, 2, 3],
+        '\u270e': 'string',
     }
 }
 
+def write_to_yaml(data):
+    with open('test.yaml', 'w') as file:
+        yaml.dump(data, file, default_flow_style=False, allow_unicode=True)
+
+    with open('test.yaml') as f_n:
+        f_n_content = yaml.load(f_n)
+    print(f_n_content)  
+
 
 if __name__ == '__main__':
+    write_to_yaml(data)

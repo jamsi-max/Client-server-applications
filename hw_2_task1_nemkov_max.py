@@ -51,7 +51,7 @@ def get_data(file_list):
 
             main_data.append(data)
 
-    with open('main_data.txt', 'w') as main_file:
+    with open('main_data.txt', 'w', encoding='utf-8') as main_file:
         main_file.write(str(main_data))
     
     return main_data
