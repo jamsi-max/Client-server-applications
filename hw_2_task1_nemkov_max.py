@@ -14,7 +14,48 @@
 # данных через вызов функции get_data(), а также сохранение подготовленных данных в соответствующий CSV-файл;
 # * Проверить работу программы через вызов функции write_to_csv().
 import csv
+import re
 
-with open('info_1.txt') as f:
-    data = f.read()
-    
+file_list = ['info_1.txt', 'info_2.txt', 'info_3.txt']
+
+
+def write_file(data_list):
+    with open('main_data.txt', 'a') as file:
+        for item in data_list:
+            file.write(item+',')
+        file.write('\n')
+
+
+def get_data(file_list):
+    main_data = ['Изготовитель системы', 'Название ОС', 'Код продукта', 'Тип системы']
+    create_system = []
+    name_os = []
+    code_prod = []
+    sys_type = []
+
+    for item in file_list:
+        with open(item) as file:
+            for line in file:
+                data_1 = re.findall(r'^Изготовитель системы:\s+(.+$)', line)
+                data_2 = re.findall(r'^Название ОС:\s+(.+$)', line)
+                data_3 = re.findall(r'^Код продукта:\s+(.+$)', line)
+                data_4 = re.findall(r'^Тип системы:\s+(.+$)', line)
+
+                if data_1:
+                    create_system.append(*data_1)
+                elif data_2:
+                    name_os.append(*data_2)
+                elif data_3:
+                    code_prod.append(*data_3)
+                elif data_4:
+                    sys_type.append(*data_4)
+
+    write_file(main_data)
+    write_file(create_system)
+    write_file(name_os)
+    write_file(code_prod)
+    write_file(sys_type)
+
+
+if __name__ == "__main__":
+    get_data(file_list)
