@@ -10,18 +10,19 @@
 import json
 
 def write_order_to_json(item, quantity, price, buyer, date):
-    order = {
-        'order': [
-            item,
-            quantity,
-            price,
-            buyer,
-            date
-        ],
-    }
 
-    with open('orders.json', 'a') as fl_json:
-        json.dump(order, fl_json, indent=4)
+    with open('orders.json') as fl:
+        obj = json.load(fl)
+        
+        if not obj['orders']:
+            obj['orders'].append(item)
+            obj['orders'].append(quantity)
+            obj['orders'].append(price)
+            obj['orders'].append(buyer)
+            obj['orders'].append(date)
+
+    with open('orders.json', 'w') as fl_json:
+        json.dump(obj, fl_json, indent=4)
 
 
 if __name__ == '__main__':
