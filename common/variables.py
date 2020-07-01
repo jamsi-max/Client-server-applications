@@ -4,6 +4,7 @@ import time
 MAX_COUNT_CONNECTIONS = 5
 MAX_SIZE_RECEIVE_DATA = 4096
 DEFAULT_ENCODING = 'utf-8'
+DEFAULT_PORT = 7777
 
 # Response server
 RESPONSE_LIST = {
@@ -47,5 +48,10 @@ ACTION = [
         'user': {
             'username': 'Guest'
             }
+    },
+    {
+        'test': 'test',
+        'time': time.ctime(),
+        'user': 'Guest'
     }
 ]

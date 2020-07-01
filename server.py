@@ -4,7 +4,8 @@ import click
 
 from common.variables import (
     MAX_COUNT_CONNECTIONS,
-    MAX_SIZE_RECEIVE_DATA
+    MAX_SIZE_RECEIVE_DATA,
+    DEFAULT_PORT
     )
 from common.utils import (
     args_validation,
@@ -23,7 +24,7 @@ from common.utils import (
 @click.option(
     "-p",
     "--port",
-    default=7777,
+    default=DEFAULT_PORT,
     help="The port number of the server")
 def run_server(addr, port):
     clear_addr, clear_port = args_validation(addr, port)
@@ -46,7 +47,7 @@ def run_server(addr, port):
             response = generate_response(request_data)
             send_message(client_socket, response)
             client_socket.close()
-        except (ValueError, json.JSONDecodeError):
+        except ValueError:
             print('Unknown message format!')
             client_socket.close()
 

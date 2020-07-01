@@ -3,6 +3,7 @@ import click
 
 from common.variables import (
     MAX_SIZE_RECEIVE_DATA,
+    DEFAULT_PORT,
     ACTION
     )
 from common.utils import (
@@ -21,7 +22,7 @@ from common.utils import (
 @click.option(
     "-p",
     "--port",
-    default=7777,
+    default=DEFAULT_PORT,
     help="Port number for connecting to the server")
 def client_run(addr, port):
     clear_addr, clear_port = args_validation(addr, port)

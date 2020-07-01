@@ -56,8 +56,12 @@ def get_request(request):
     return data: dict
     '''
     if isinstance(request, bytes):
-        data = request.decode(DEFAULT_ENCODING)
-        data = json.loads(data)
+        try:
+            data = request.decode(DEFAULT_ENCODING)
+            data = json.loads(data)
+        except json.JSONDecodeError:
+            print('Unknown message format!')
+            sys.exit(1)
         if isinstance(data, dict):
             return data
     raise ValueError
@@ -70,13 +74,15 @@ def generate_response(request_data):
 
     return json: str bytes
     '''
-    action = request_data.get('action', None)
-    if action and request_data.get('user')['username'] == 'Guest':
-        response = RESPONSE_LIST[action]
-        return json.dumps(response, indent=4).encode(DEFAULT_ENCODING)
-    return json.dumps(
-        {'response': 400, 'error': 'Bad request'},
-        indent=4).encode(DEFAULT_ENCODING)
+    if hasattr(request_data, 'get'):
+        action = request_data.get('action', None)
+        if action and request_data.get('user')['username'] == 'Guest':
+            response = RESPONSE_LIST[action]
+            return json.dumps(response, indent=4).encode(DEFAULT_ENCODING)
+        return json.dumps(
+            {'response': 400, 'error': 'Bad request'},
+            indent=4).encode(DEFAULT_ENCODING)
+    raise TypeError
 
 
 def send_message(recv_socket, message):
@@ -91,6 +97,10 @@ def send_message(recv_socket, message):
 def generate_request(request_list):
     '''
     Function for preparing requests to the server
+
+    return string: bytes
     '''
-    request = request_list[randint(0, 2)]
-    return json.dumps(request, indent=4).encode(DEFAULT_ENCODING)
+    if isinstance(request_list, list):
+        request = request_list[randint(0, len(request_list)-1)]
+        return json.dumps(request, indent=4).encode(DEFAULT_ENCODING)
+    raise TypeError
