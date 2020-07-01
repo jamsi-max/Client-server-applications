@@ -1,5 +1,4 @@
 import unittest
-import pytest
 import sys
 import os
 
@@ -74,7 +73,7 @@ class TestGenerateResponse(unittest.TestCase):
     def test_generate_response_raise_type_error(self):
         with self.assertRaises(TypeError):
             generate_response('abc')
-    
+
     def test_generate_response_return_str_bytes(self):
         result = generate_response({'test': 'test'})
         self.assertIsInstance(result, bytes)
