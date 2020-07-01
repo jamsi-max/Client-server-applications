@@ -1,32 +1,42 @@
-import sys
 import socket
-import json
-import time
+import click
+
+from common.variables import (
+    MAX_SIZE_RECEIVE_DATA,
+    ACTION
+    )
+from common.utils import (
+    args_validation,
+    get_request,
+    generate_request
+    )
 
 
-def client_run(addr, port=7777):
+@click.command()
+@click.option(
+    "-a",
+    "--addr",
+    type=str,
+    help="Server address to connect")
+@click.option(
+    "-p",
+    "--port",
+    default=7777,
+    help="Port number for connecting to the server")
+def client_run(addr, port):
+    clear_addr, clear_port = args_validation(addr, port)
+
     client_socket = socket.socket()
-    msg = {
-        'action': 'presence',
-        'time': time.ctime(time.time())
-        }
-    client_socket.connect((addr, port))
-    client_socket.send(json.dumps(msg).encode('utf-8'))
+    request = generate_request(ACTION)
 
-    data = client_socket.recv(1024)
-    data = json.loads(data.decode('utf-8'))
+    client_socket.connect((clear_addr, clear_port))
+    client_socket.send(request)
+
+    data = client_socket.recv(MAX_SIZE_RECEIVE_DATA)
+    request_data = get_request(data)
+    print(request_data)
     client_socket.close()
-
-    if data.get('response') == 200:
-        print(data['alert'])
 
 
 if __name__ == '__main__':
-    if len(sys.argv) < 2:
-        print('Arguments are not specified correctly!')
-    
-    if len(sys.argv) == 3:
-        client_run(addr = sys.argv[1], port = sys.argv[2])
-
-    if len(sys.argv) == 2:
-        client_run(addr = sys.argv[1])
+    client_run()

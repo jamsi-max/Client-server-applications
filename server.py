@@ -1,45 +1,55 @@
-import socket
-import sys
 import json
-import time
+import socket
+import click
+
+from common.variables import (
+    MAX_COUNT_CONNECTIONS,
+    MAX_SIZE_RECEIVE_DATA
+    )
+from common.utils import (
+    args_validation,
+    get_request,
+    generate_response,
+    send_message
+    )
 
 
-def run_server(arg_addr='-a', addr='', arg_port='-p', port=7777):
+@click.command()
+@click.option(
+    "-a",
+    "--addr",
+    default='localhost',
+    help="Server network address")
+@click.option(
+    "-p",
+    "--port",
+    default=7777,
+    help="The port number of the server")
+def run_server(addr, port):
+    clear_addr, clear_port = args_validation(addr, port)
+
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    # отключаем таймаут переподключения
-    server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    server_socket.bind((addr, port))
-    server_socket.listen()
+    server_socket.setsockopt(
+        socket.SOL_SOCKET,
+        socket.SO_REUSEADDR,
+        True)  # disable timeout server
+    server_socket.bind((clear_addr, clear_port))
+    server_socket.listen(MAX_COUNT_CONNECTIONS)
 
     while True:
         client_socket, addr = server_socket.accept()
-        request = client_socket.recv(1024)
-        request = request.decode('utf-8')
-        data = json.loads(request)
+        request = client_socket.recv(MAX_SIZE_RECEIVE_DATA)
+        try:
+            request_data = get_request(request)
+            print(request_data)
 
-        if data.get('action'):
-            print(data.get('time', 'No data'))
-            response = {
-                'response': 200,
-                'alert': 'The connection is established',
-                'time': time.ctime(time.time())
-                }
-        client_socket.send(json.dumps(response).encode('utf-8'))
-        client_socket.close()
+            response = generate_response(request_data)
+            send_message(client_socket, response)
+            client_socket.close()
+        except (ValueError, json.JSONDecodeError):
+            print('Unknown message format!')
+            client_socket.close()
 
 
 if __name__ == '__main__':
-    if len(sys.argv) == 1:
-        run_server()
-
-    if '-a' in sys.argv and len(sys.argv) == 3:
-        run_server(arg_addr=sys.argv[1], addr=sys.argv[2])
-
-    if '-p' in sys.argv and len(sys.argv) == 3:
-        run_server(arg_port=sys.argv[1], port=sys.argv[2])
-
-    if '-a' in sys.argv and '-p' in sys.argv and len(sys.argv) == 5:
-        run_server(arg_addr=sys.argv[1], addr=sys.argv[2], arg_port=sys.argv[1], port=sys.argv[2])
-    
-    if len(sys.argv) > 1:
-        print('Arguments are not specified correctly!')
+    run_server()
