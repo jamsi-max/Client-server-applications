@@ -12,6 +12,7 @@ from common.utils import (
     generate_response,
     send_message
     )
+from settings.server_log_config import logger
 
 
 @click.command()
@@ -41,7 +42,8 @@ def run_server(addr, port):
         request = client_socket.recv(MAX_SIZE_RECEIVE_DATA)
         try:
             request_data = get_request(request)
-            print(request_data)
+            # print(request_data)
+            logger.debug(request_data)
 
             response = generate_response(request_data)
             send_message(client_socket, response)
