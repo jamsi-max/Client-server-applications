@@ -4,7 +4,7 @@ client_secret_996869857000-lob0i1h8soc080mac5ulg4muj1eg821a.apps.googleuserconte
 # Edit at https://www.gitignore.io/?templates=git,django,python,pycharm,visualstudiocode
 
 ### Django ###
-*.log
+# *.log
 *.pot
 *.pyc
 __pycache__/

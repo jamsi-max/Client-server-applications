@@ -6,6 +6,7 @@ from common.variables import (
     DEFAULT_ENCODING,
     RESPONSE_LIST
     )
+from common.decorators import LogInfo
 
 
 class PortError(Exception):
@@ -16,6 +17,7 @@ class AddrError(Exception):
     pass
 
 
+@LogInfo('full')
 def args_validation(addr, port):
     '''
     Validation of data entered by the user
@@ -33,22 +35,27 @@ def args_validation(addr, port):
             raise AddrError
         return (addr, port)
     except PortError:
-        print('The port is out of range 1024...65535.\
-        \nTry "server.py --help" for help')
+        # logger.exception(f'The port is out of range 1024...65535. Port = {port}')
+        # print('The port is out of range 1024...65535.\
+        # \nTry "server.py --help" for help')
         sys.exit(1)
     except ValueError:
-        print('The IP address cannot contain "str".\
-        \nTry "server.py --help" for help')
+        # logger.exception(f'The IP address cannot contain "str". Addr = {addr}')
+        # print('The IP address cannot contain "str".\
+        # \nTry "server.py --help" for help')
         sys.exit(1)
     except AddrError:
-        print('Invalid ip address format.\nTry "server.py --help" for help')
+        # logger.exception(f'Invalid ip address format. Addr = {addr}')
+        # print('Invalid ip address format.\nTry "server.py --help" for help')
         sys.exit(1)
     except AttributeError:
-        print('The required "addr" attribute is missing.\
-        \nTry "server.py --help" for help')
+        # logger.exception(f'The required "addr" attribute is missing. Addr = {addr}')
+        # print('The required "addr" attribute is missing.\
+        # \nTry "server.py --help" for help')
         sys.exit(1)
 
 
+@LogInfo('full')
 def get_request(request):
     '''
     The function gets JSON data as bytes and returns a Python object
@@ -60,13 +67,14 @@ def get_request(request):
             data = request.decode(DEFAULT_ENCODING)
             data = json.loads(data)
         except json.JSONDecodeError:
-            print('Unknown message format!')
+            # logger.exception(f'Unknown message format = {request}')
+            # logger.debug(f'Unknown message format = {request}', exc_info=True)
             sys.exit(1)
         if isinstance(data, dict):
             return data
     raise ValueError
 
-
+@LogInfo()
 def generate_response(request_data):
     '''
     The function receives a query in the form of a dictionary and
@@ -85,6 +93,7 @@ def generate_response(request_data):
     raise TypeError
 
 
+@LogInfo()
 def send_message(recv_socket, message):
     '''
     Function for sending messages to the server
@@ -94,6 +103,7 @@ def send_message(recv_socket, message):
     recv_socket.send(message)
 
 
+@LogInfo()
 def generate_request(request_list):
     '''
     Function for preparing requests to the server

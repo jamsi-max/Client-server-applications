@@ -1,0 +1,29 @@
+2020-07-06 17:18:28,745 - The "get_request" function is called from the module -> client.py -> function:client_run()
+2020-07-06 17:28:34,372 - The "get_request" function is called from the module -> client.py -> function:client_run()
+2020-07-06 17:29:07,308 - The "get_request" function is called from the module -> client.py -> function:client_run()
+2020-07-06 17:29:07,308 - !!!!!!!!name 'logger' is not defined
+Traceback (most recent call last):
+  File "/home/device/Рабочий стол/Client-server applications/common/utils.py", line 68, in get_request
+    data = json.loads(data)
+  File "/home/device/.pyenv/versions/3.7.0/lib/python3.7/json/__init__.py", line 348, in loads
+    return _default_decoder.decode(s)
+  File "/home/device/.pyenv/versions/3.7.0/lib/python3.7/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/home/device/.pyenv/versions/3.7.0/lib/python3.7/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/device/Рабочий стол/Client-server applications/common/decorators.py", line 30, in wrapper
+    result = func(*args, **kwargs)
+  File "/home/device/Рабочий стол/Client-server applications/common/utils.py", line 70, in get_request
+    logger.exception(f'Unknown message format = {request}')
+NameError: name 'logger' is not defined
+2020-07-06 17:34:27,885 - INFO - decorators:wrapper:29 - ()- MainThread - The "args_validation" function is called from the module -> client.py -> function:client_run()
+2020-07-06 17:34:27,887 - INFO - decorators:wrapper:29 - ()- MainThread - The "generate_request" function is called from the module -> client.py -> function:client_run()
+2020-07-06 17:34:27,904 - INFO - decorators:wrapper:29 - ()- MainThread - The "get_request" function is called from the module -> client.py -> function:client_run()
+2020-07-06 17:37:36,556 - INFO - decorators:wrapper:29 - ()- MainThread - The "args_validation" function is called from the module -> client.py -> function:client_run()
+2020-07-06 17:37:36,559 - INFO - decorators:wrapper:29 - ()- MainThread - The "generate_request" function is called from the module -> client.py -> function:client_run()
+2020-07-06 17:37:36,571 - INFO - decorators:wrapper:29 - ()- MainThread - The "get_request" function is called from the module -> client.py -> function:client_run()

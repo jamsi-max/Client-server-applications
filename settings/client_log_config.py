@@ -1,14 +1,8 @@
-import logging
-from datetime import datetime
+import logging.config
+from .settings_log import logger_config
 
 
-logger = logging.getLogger()
-formatter = logging.Formatter(
-    "%(asctime)s - %(levelname)s - %(module)s - %(message)s "
-    )
-log_file = logging.FileHandler(f'log/{datetime.now()}_client.log', encoding='utf-8')
-log_file.setLevel(logging.DEBUG)
-log_file.setFormatter(formatter)
+logger_config['handlers']['file']['filename'] = 'log/client.log'
+logging.config.dictConfig(logger_config)
 
-logger.addHandler(log_file)
-logger.setLevel(logging.DEBUG)
+logger = logging.getLogger('app_loger')

@@ -11,7 +11,6 @@ from common.utils import (
     get_request,
     generate_request
     )
-from settings.client_log_config import logger
 
 
 @click.command()
@@ -35,9 +34,8 @@ def client_run(addr, port):
     client_socket.send(request)
 
     data = client_socket.recv(MAX_SIZE_RECEIVE_DATA)
-    request_data = get_request(data)
-    # print(request_data)
-    logger.debug(request_data)
+    get_request(data)
+
     client_socket.close()
 
 

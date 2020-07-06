@@ -1,13 +1,11 @@
-import logging
-from datetime import datetime
+import logging.config
+from .settings_log import logger_config
+import os
 
-logger = logging.getLogger('app.main_server')
-formatter = logging.Formatter(
-    "%(asctime)s - %(levelname)s - %(module)s - %(message)s "
-    )
-log_file = logging.FileHandler(f'log/{datetime.now()}_serverg .log', encoding='utf-8')
-log_file.setLevel(logging.DEBUG)
-log_file.setFormatter(formatter)
+PATH = os.path.abspath(os.getcwd())
+PATH = os.path.join(PATH, 'log/server.log')
 
-logger.addHandler(log_file)
-logger.setLevel(logging.DEBUG)
+logger_config['handlers']['file']['filename'] = PATH
+logging.config.dictConfig(logger_config)
+
+logger = logging.getLogger('app_loger')

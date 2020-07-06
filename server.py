@@ -42,14 +42,12 @@ def run_server(addr, port):
         request = client_socket.recv(MAX_SIZE_RECEIVE_DATA)
         try:
             request_data = get_request(request)
-            # print(request_data)
-            logger.debug(request_data)
 
             response = generate_response(request_data)
             send_message(client_socket, response)
             client_socket.close()
         except ValueError:
-            print('Unknown message format!')
+            logger.debug('Unknown message format!', exc_info=True)
             client_socket.close()
 
 
