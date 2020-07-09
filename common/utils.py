@@ -157,13 +157,13 @@ def write_response(request, client_write, client_all):
             client_all.remove(sock)
 
 
+@LogInfo()
 def receive_message(client_socket):
     try:
         message_header = client_socket.recv(HEADER_LENGHT)
-
+        print(message_header)
         if not len(message_header):
             return False
-
         message_lenght = int(message_header.decode(DEFAULT_ENCODING).strip())
         return {
             'header': message_header,

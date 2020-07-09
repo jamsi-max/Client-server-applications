@@ -76,7 +76,6 @@ def run_server(addr, port):
                     if client_socket != sock:
                         client_socket.send(user['header'] + user['data'] + message['header'] + message['data'])
 
-
         for sock in exception_sockets:
             socket_list.remove(sock)
             del clients[sock]
