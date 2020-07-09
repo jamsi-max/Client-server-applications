@@ -1,10 +1,13 @@
 import sys
 import json
 from random import randint
+import socket
 
 from common.variables import (
     DEFAULT_ENCODING,
-    RESPONSE_LIST
+    RESPONSE_LIST,
+    MAX_SIZE_RECEIVE_DATA,
+    HEADER_LENGHT
     )
 from common.decorators import LogInfo
 
@@ -35,23 +38,12 @@ def args_validation(addr, port):
             raise AddrError
         return (addr, port)
     except PortError:
-        # logger.exception(f'The port is out of range 1024...65535. Port = {port}')
-        # print('The port is out of range 1024...65535.\
-        # \nTry "server.py --help" for help')
         sys.exit(1)
     except ValueError:
-        # logger.exception(f'The IP address cannot contain "str". Addr = {addr}')
-        # print('The IP address cannot contain "str".\
-        # \nTry "server.py --help" for help')
         sys.exit(1)
     except AddrError:
-        # logger.exception(f'Invalid ip address format. Addr = {addr}')
-        # print('Invalid ip address format.\nTry "server.py --help" for help')
         sys.exit(1)
     except AttributeError:
-        # logger.exception(f'The required "addr" attribute is missing. Addr = {addr}')
-        # print('The required "addr" attribute is missing.\
-        # \nTry "server.py --help" for help')
         sys.exit(1)
 
 
@@ -67,12 +59,11 @@ def get_request(request):
             data = request.decode(DEFAULT_ENCODING)
             data = json.loads(data)
         except json.JSONDecodeError:
-            # logger.exception(f'Unknown message format = {request}')
-            # logger.debug(f'Unknown message format = {request}', exc_info=True)
             sys.exit(1)
         if isinstance(data, dict):
             return data
     raise ValueError
+
 
 @LogInfo()
 def generate_response(request_data):
@@ -114,3 +105,70 @@ def generate_request(request_list):
         request = request_list[randint(0, len(request_list)-1)]
         return json.dumps(request, indent=4).encode(DEFAULT_ENCODING)
     raise TypeError
+
+
+@LogInfo()
+def new_listen_socket(pool):
+    '''
+    Function create new socket
+
+    return socket
+    '''
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.setsockopt(
+        socket.SOL_SOCKET,
+        socket.SO_REUSEADDR,
+        1)  # disable reloade timeout server
+    sock.bind(pool)
+    sock.listen()
+    sock.settimeout(0.2)
+
+    return sock
+
+
+def read_request(client_read, client_all):
+    '''
+    '''
+    response = {}
+
+    for sock in client_read:
+        try:
+            data = sock.recv(MAX_SIZE_RECEIVE_DATA).decode(DEFAULT_ENCODING)
+            response[sock.getpeername()] = data
+        except Exception:
+            print(f'Client {sock} disconnected')
+            client_all.remove(sock)
+
+    return response
+
+
+def write_response(request, client_write, client_all):
+    '''
+    Function send message
+    '''
+    print(request)
+    for sock in client_all:
+        try:
+            response = request[sock.getpeername()].encode(DEFAULT_ENCODING)
+            sock.send(response)
+        except Exception:
+            print(f'Client {sock} disconnected')
+            sock.close()
+            client_all.remove(sock)
+
+
+def receive_message(client_socket):
+    try:
+        message_header = client_socket.recv(HEADER_LENGHT)
+
+        if not len(message_header):
+            return False
+
+        message_lenght = int(message_header.decode(DEFAULT_ENCODING).strip())
+        return {
+            'header': message_header,
+            'data': client_socket.recv(message_lenght)
+            }
+
+    except Exception:
+        return False

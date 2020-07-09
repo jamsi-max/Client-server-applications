@@ -1,25 +1,124 @@
-
-2020-07-06 17:18:28,741 - The "get_request" function is called from the module -> server.py -> function:run_server()
-2020-07-06 17:28:34,368 - The "get_request" function is called from the module -> server.py -> function:run_server()
-2020-07-06 17:29:07,294 - The "get_request" function is called from the module -> server.py -> function:run_server()
-2020-07-06 17:29:07,294 - !!!!!!!!
+2020-07-08 23:33:28,487 - INFO - decorators:wrapper:31 - ()- MainThread - The "args_validation" function is called from the module -> server.py -> function:run_server()
+2020-07-08 23:33:28,490 - INFO - decorators:wrapper:31 - ()- MainThread - The "new_listen_socket" function is called from the module -> server.py -> function:run_server()
+2020-07-08 23:33:28,491 - ERROR - decorators:wrapper:37 - ()- MainThread - ERROR NAME: 'module' object is not callable
 Traceback (most recent call last):
-  File "/home/device/Рабочий стол/Client-server applications/common/decorators.py", line 30, in wrapper
+  File "/home/device/Рабочий стол/Client-server applications/common/decorators.py", line 34, in wrapper
     result = func(*args, **kwargs)
-  File "/home/device/Рабочий стол/Client-server applications/common/utils.py", line 75, in get_request
-    raise ValueError
-ValueError
-2020-07-06 17:34:09,979 - INFO - decorators:wrapper:29 - ()- MainThread - The "args_validation" function is called from the module -> server.py -> function:run_server()
-2020-07-06 17:34:27,891 - INFO - decorators:wrapper:29 - ()- MainThread - The "get_request" function is called from the module -> server.py -> function:run_server()
-2020-07-06 17:34:27,891 - ERROR - decorators:wrapper:34 - ()- MainThread - !!!!!!!!
+  File "/home/device/Рабочий стол/Client-server applications/common/utils.py", line 123, in new_listen_socket
+    sock = socket(socket.AF_INET, socket.SOCK_STREAM)
+TypeError: 'module' object is not callable
+2020-07-08 23:36:29,009 - INFO - decorators:wrapper:31 - ()- MainThread - The "args_validation" function is called from the module -> server.py -> function:run_server()
+2020-07-08 23:36:29,012 - INFO - decorators:wrapper:31 - ()- MainThread - The "new_listen_socket" function is called from the module -> server.py -> function:run_server()
+2020-07-08 23:36:29,012 - ERROR - decorators:wrapper:37 - ()- MainThread - ERROR NAME: 'module' object is not callable
 Traceback (most recent call last):
-  File "/home/device/Рабочий стол/Client-server applications/common/decorators.py", line 32, in wrapper
+  File "/home/device/Рабочий стол/Client-server applications/common/decorators.py", line 34, in wrapper
     result = func(*args, **kwargs)
-  File "/home/device/Рабочий стол/Client-server applications/common/utils.py", line 75, in get_request
-    raise ValueError
-ValueError
-2020-07-06 17:35:53,520 - INFO - decorators:wrapper:29 - ()- MainThread - The "args_validation" function is called from the module -> server.py -> function:run_server()
-2020-07-06 17:37:26,820 - INFO - decorators:wrapper:29 - ()- MainThread - The "args_validation" function is called from the module -> server.py -> function:run_server()
-2020-07-06 17:37:36,563 - INFO - decorators:wrapper:29 - ()- MainThread - The "get_request" function is called from the module -> server.py -> function:run_server()
-2020-07-06 17:37:36,565 - INFO - decorators:wrapper:29 - ()- MainThread - The "generate_response" function is called from the module -> server.py -> function:run_server()
-2020-07-06 17:37:36,568 - INFO - decorators:wrapper:29 - ()- MainThread - The "send_message" function is called from the module -> server.py -> function:run_server()
+  File "/home/device/Рабочий стол/Client-server applications/common/utils.py", line 123, in new_listen_socket
+    sock = socket(socket.AF_INET, socket.SOCK_STREAM)
+TypeError: 'module' object is not callable
+2020-07-08 23:38:55,426 - INFO - decorators:wrapper:31 - ()- MainThread - The "args_validation" function is called from the module -> server.py -> function:run_server()
+2020-07-08 23:38:55,429 - INFO - decorators:wrapper:31 - ()- MainThread - The "new_listen_socket" function is called from the module -> server.py -> function:run_server()
+2020-07-08 23:38:55,429 - ERROR - decorators:wrapper:37 - ()- MainThread - ERROR NAME: 'module' object is not callable
+Traceback (most recent call last):
+  File "/home/device/Рабочий стол/Client-server applications/common/decorators.py", line 34, in wrapper
+    result = func(*args, **kwargs)
+  File "/home/device/Рабочий стол/Client-server applications/common/utils.py", line 123, in new_listen_socket
+    sock = socket(socket.AF_INET, socket.SOCK_STREAM)
+TypeError: 'module' object is not callable
+2020-07-08 23:40:00,392 - INFO - decorators:wrapper:31 - ()- MainThread - The "args_validation" function is called from the module -> server.py -> function:run_server()
+2020-07-08 23:40:00,394 - INFO - decorators:wrapper:31 - ()- MainThread - The "new_listen_socket" function is called from the module -> server.py -> function:run_server()
+2020-07-08 23:40:00,395 - ERROR - decorators:wrapper:37 - ()- MainThread - ERROR NAME: 'module' object is not callable
+Traceback (most recent call last):
+  File "/home/device/Рабочий стол/Client-server applications/common/decorators.py", line 34, in wrapper
+    result = func(*args, **kwargs)
+  File "/home/device/Рабочий стол/Client-server applications/common/utils.py", line 124, in new_listen_socket
+    sock = socket(socket.AF_INET, socket.SOCK_STREAM)
+TypeError: 'module' object is not callable
+2020-07-08 23:40:25,671 - INFO - decorators:wrapper:31 - ()- MainThread - The "args_validation" function is called from the module -> server.py -> function:run_server()
+2020-07-08 23:40:25,674 - INFO - decorators:wrapper:31 - ()- MainThread - The "new_listen_socket" function is called from the module -> server.py -> function:run_server()
+2020-07-08 23:40:25,674 - ERROR - decorators:wrapper:37 - ()- MainThread - ERROR NAME: 'module' object is not callable
+Traceback (most recent call last):
+  File "/home/device/Рабочий стол/Client-server applications/common/decorators.py", line 34, in wrapper
+    result = func(*args, **kwargs)
+  File "/home/device/Рабочий стол/Client-server applications/common/utils.py", line 124, in new_listen_socket
+    sock = socket(socket.AF_INET, socket.SOCK_STREAM)
+TypeError: 'module' object is not callable
+2020-07-08 23:40:44,781 - INFO - decorators:wrapper:31 - ()- MainThread - The "args_validation" function is called from the module -> server.py -> function:run_server()
+2020-07-08 23:40:44,783 - INFO - decorators:wrapper:31 - ()- MainThread - The "new_listen_socket" function is called from the module -> server.py -> function:run_server()
+2020-07-08 23:40:44,784 - ERROR - decorators:wrapper:37 - ()- MainThread - ERROR NAME: 'module' object is not callable
+Traceback (most recent call last):
+  File "/home/device/Рабочий стол/Client-server applications/common/decorators.py", line 34, in wrapper
+    result = func(*args, **kwargs)
+  File "/home/device/Рабочий стол/Client-server applications/common/utils.py", line 124, in new_listen_socket
+    sock = socket(socket.AF_INET, socket.SOCK_STREAM)
+TypeError: 'module' object is not callable
+2020-07-08 23:41:27,892 - INFO - decorators:wrapper:31 - ()- MainThread - The "args_validation" function is called from the module -> server.py -> function:run_server()
+2020-07-08 23:41:27,894 - INFO - decorators:wrapper:31 - ()- MainThread - The "new_listen_socket" function is called from the module -> server.py -> function:run_server()
+2020-07-08 23:41:27,895 - ERROR - decorators:wrapper:37 - ()- MainThread - ERROR NAME: 'module' object is not callable
+Traceback (most recent call last):
+  File "/home/device/Рабочий стол/Client-server applications/common/decorators.py", line 34, in wrapper
+    result = func(*args, **kwargs)
+  File "/home/device/Рабочий стол/Client-server applications/common/utils.py", line 123, in new_listen_socket
+    sock = socket(socket.AF_INET, socket.SOCK_STREAM)
+TypeError: 'module' object is not callable
+2020-07-08 23:41:47,690 - INFO - decorators:wrapper:31 - ()- MainThread - The "args_validation" function is called from the module -> server.py -> function:run_server()
+2020-07-08 23:41:47,692 - INFO - decorators:wrapper:31 - ()- MainThread - The "new_listen_socket" function is called from the module -> server.py -> function:run_server()
+2020-07-08 23:41:47,693 - ERROR - decorators:wrapper:37 - ()- MainThread - ERROR NAME: 'module' object is not callable
+Traceback (most recent call last):
+  File "/home/device/Рабочий стол/Client-server applications/common/decorators.py", line 34, in wrapper
+    result = func(*args, **kwargs)
+  File "/home/device/Рабочий стол/Client-server applications/common/utils.py", line 123, in new_listen_socket
+    sock = socket(socket.AF_INET, socket.SOCK_STREAM)
+TypeError: 'module' object is not callable
+2020-07-08 23:42:34,698 - INFO - decorators:wrapper:31 - ()- MainThread - The "args_validation" function is called from the module -> server.py -> function:run_server()
+2020-07-08 23:43:05,491 - INFO - decorators:wrapper:31 - ()- MainThread - The "args_validation" function is called from the module -> server.py -> function:run_server()
+2020-07-08 23:43:40,536 - INFO - decorators:wrapper:31 - ()- MainThread - The "args_validation" function is called from the module -> server.py -> function:run_server()
+2020-07-08 23:43:40,539 - INFO - decorators:wrapper:31 - ()- MainThread - The "new_listen_socket" function is called from the module -> server.py -> function:run_server()
+2020-07-08 23:44:51,627 - INFO - decorators:wrapper:31 - ()- MainThread - The "args_validation" function is called from the module -> server.py -> function:run_server()
+2020-07-08 23:44:51,630 - INFO - decorators:wrapper:31 - ()- MainThread - The "new_listen_socket" function is called from the module -> server.py -> function:run_server()
+2020-07-08 23:46:00,309 - INFO - decorators:wrapper:31 - ()- MainThread - The "args_validation" function is called from the module -> server.py -> function:run_server()
+2020-07-08 23:46:00,312 - INFO - decorators:wrapper:31 - ()- MainThread - The "new_listen_socket" function is called from the module -> server.py -> function:run_server()
+2020-07-08 23:48:04,012 - INFO - decorators:wrapper:31 - ()- MainThread - The "args_validation" function is called from the module -> server.py -> function:run_server()
+2020-07-08 23:48:04,015 - INFO - decorators:wrapper:31 - ()- MainThread - The "new_listen_socket" function is called from the module -> server.py -> function:run_server()
+2020-07-08 23:50:18,051 - INFO - decorators:wrapper:31 - ()- MainThread - The "args_validation" function is called from the module -> server.py -> function:run_server()
+2020-07-08 23:50:18,054 - INFO - decorators:wrapper:31 - ()- MainThread - The "new_listen_socket" function is called from the module -> server.py -> function:run_server()
+2020-07-09 15:42:22,538 - INFO - decorators:wrapper:31 - ()- MainThread - The "args_validation" function is called from the module -> server.py -> function:run_server()
+2020-07-09 15:42:22,541 - INFO - decorators:wrapper:31 - ()- MainThread - The "new_listen_socket" function is called from the module -> server.py -> function:run_server()
+2020-07-09 15:43:29,538 - INFO - decorators:wrapper:31 - ()- MainThread - The "args_validation" function is called from the module -> server.py -> function:run_server()
+2020-07-09 15:43:29,541 - INFO - decorators:wrapper:31 - ()- MainThread - The "new_listen_socket" function is called from the module -> server.py -> function:run_server()
+2020-07-09 15:47:05,654 - INFO - decorators:wrapper:31 - ()- MainThread - The "args_validation" function is called from the module -> server.py -> function:run_server()
+2020-07-09 15:47:05,657 - INFO - decorators:wrapper:31 - ()- MainThread - The "new_listen_socket" function is called from the module -> server.py -> function:run_server()
+2020-07-09 15:48:13,606 - INFO - decorators:wrapper:31 - ()- MainThread - The "args_validation" function is called from the module -> server.py -> function:run_server()
+2020-07-09 15:48:13,608 - INFO - decorators:wrapper:31 - ()- MainThread - The "new_listen_socket" function is called from the module -> server.py -> function:run_server()
+2020-07-09 15:49:21,688 - INFO - decorators:wrapper:31 - ()- MainThread - The "args_validation" function is called from the module -> server.py -> function:run_server()
+2020-07-09 15:49:21,691 - INFO - decorators:wrapper:31 - ()- MainThread - The "new_listen_socket" function is called from the module -> server.py -> function:run_server()
+2020-07-09 15:49:47,099 - INFO - decorators:wrapper:31 - ()- MainThread - The "args_validation" function is called from the module -> server.py -> function:run_server()
+2020-07-09 15:49:47,102 - INFO - decorators:wrapper:31 - ()- MainThread - The "new_listen_socket" function is called from the module -> server.py -> function:run_server()
+2020-07-09 16:18:02,932 - INFO - decorators:wrapper:31 - ()- MainThread - The "args_validation" function is called from the module -> server.py -> function:run_server()
+2020-07-09 16:18:02,936 - INFO - decorators:wrapper:31 - ()- MainThread - The "new_listen_socket" function is called from the module -> server.py -> function:run_server()
+2020-07-09 16:18:34,092 - INFO - decorators:wrapper:31 - ()- MainThread - The "args_validation" function is called from the module -> server.py -> function:run_server()
+2020-07-09 16:18:34,095 - INFO - decorators:wrapper:31 - ()- MainThread - The "new_listen_socket" function is called from the module -> server.py -> function:run_server()
+2020-07-09 16:20:35,125 - INFO - decorators:wrapper:31 - ()- MainThread - The "args_validation" function is called from the module -> server.py -> function:run_server()
+2020-07-09 16:20:35,128 - INFO - decorators:wrapper:31 - ()- MainThread - The "new_listen_socket" function is called from the module -> server.py -> function:run_server()
+2020-07-09 16:22:29,006 - INFO - decorators:wrapper:31 - ()- MainThread - The "args_validation" function is called from the module -> server.py -> function:run_server()
+2020-07-09 16:22:29,009 - INFO - decorators:wrapper:31 - ()- MainThread - The "new_listen_socket" function is called from the module -> server.py -> function:run_server()
+2020-07-09 16:29:56,331 - INFO - decorators:wrapper:31 - ()- MainThread - The "args_validation" function is called from the module -> server.py -> function:run_server()
+2020-07-09 16:29:56,334 - INFO - decorators:wrapper:31 - ()- MainThread - The "new_listen_socket" function is called from the module -> server.py -> function:run_server()
+2020-07-09 16:33:03,180 - INFO - decorators:wrapper:31 - ()- MainThread - The "args_validation" function is called from the module -> server.py -> function:run_server()
+2020-07-09 16:33:03,183 - INFO - decorators:wrapper:31 - ()- MainThread - The "new_listen_socket" function is called from the module -> server.py -> function:run_server()
+2020-07-09 16:37:04,909 - INFO - decorators:wrapper:31 - ()- MainThread - The "args_validation" function is called from the module -> server.py -> function:run_server()
+2020-07-09 16:37:04,913 - INFO - decorators:wrapper:31 - ()- MainThread - The "new_listen_socket" function is called from the module -> server.py -> function:run_server()
+2020-07-09 17:24:14,328 - INFO - decorators:wrapper:31 - ()- MainThread - The "args_validation" function is called from the module -> server.py -> function:run_server()
+2020-07-09 17:24:14,333 - INFO - decorators:wrapper:31 - ()- MainThread - The "new_listen_socket" function is called from the module -> server.py -> function:run_server()
+2020-07-09 17:34:23,119 - INFO - decorators:wrapper:31 - ()- MainThread - The "args_validation" function is called from the module -> server.py -> function:run_server()
+2020-07-09 17:34:23,123 - INFO - decorators:wrapper:31 - ()- MainThread - The "new_listen_socket" function is called from the module -> server.py -> function:run_server()
+2020-07-09 17:45:14,750 - INFO - decorators:wrapper:31 - ()- MainThread - The "args_validation" function is called from the module -> server.py -> function:run_server()
+2020-07-09 17:45:14,754 - INFO - decorators:wrapper:31 - ()- MainThread - The "new_listen_socket" function is called from the module -> server.py -> function:run_server()
+2020-07-09 17:47:22,842 - INFO - decorators:wrapper:31 - ()- MainThread - The "args_validation" function is called from the module -> server.py -> function:run_server()
+2020-07-09 17:47:22,844 - INFO - decorators:wrapper:31 - ()- MainThread - The "new_listen_socket" function is called from the module -> server.py -> function:run_server()
+2020-07-09 17:50:00,971 - INFO - decorators:wrapper:31 - ()- MainThread - The "args_validation" function is called from the module -> server.py -> function:run_server()
+2020-07-09 17:50:00,975 - INFO - decorators:wrapper:31 - ()- MainThread - The "new_listen_socket" function is called from the module -> server.py -> function:run_server()
+2020-07-09 18:27:53,607 - INFO - decorators:wrapper:31 - ()- MainThread - The "args_validation" function is called from the module -> server.py -> function:run_server()
+2020-07-09 18:27:53,612 - INFO - decorators:wrapper:31 - ()- MainThread - The "new_listen_socket" function is called from the module -> server.py -> function:run_server()
+2020-07-09 18:30:54,824 - INFO - decorators:wrapper:31 - ()- MainThread - The "args_validation" function is called from the module -> server.py -> function:run_server()
+2020-07-09 18:30:54,827 - INFO - decorators:wrapper:31 - ()- MainThread - The "new_listen_socket" function is called from the module -> server.py -> function:run_server()
