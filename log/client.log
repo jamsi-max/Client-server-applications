@@ -1,0 +1,3 @@
+2020-07-08 23:46:16,640 - INFO - decorators:wrapper:31 - ()- MainThread - The "args_validation" function is called from the module -> client.py -> function:client_run()
+2020-07-08 23:48:10,357 - INFO - decorators:wrapper:31 - ()- MainThread - The "args_validation" function is called from the module -> client.py -> function:client_run()
+2020-07-08 23:50:23,878 - INFO - decorators:wrapper:31 - ()- MainThread - The "args_validation" function is called from the module -> client.py -> function:client_run()
