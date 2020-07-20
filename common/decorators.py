@@ -21,7 +21,7 @@ class LogInfo():
             if self.format == 'full':
                 logger_config['formatters']['std_format']['format'] = '{asctime}\
  - {levelname} - {module}:{funcName}:{lineno} - {args}- \
-{threadName} - {message}'
+{threadName} - {message} !!!'
 
             logging.config.dictConfig(logger_config)
             logger = logging.getLogger('app_loger')

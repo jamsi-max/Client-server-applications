@@ -1,85 +1,77 @@
-import socket
-import click
-import sys
-import errno
+import threading
+from socket import (
+    socket,
+    AF_INET,
+    SOCK_STREAM
+    )
 
 from common.variables import (
-    MAX_SIZE_RECEIVE_DATA,
     DEFAULT_PORT,
     DEFAULT_ADDR,
     DEFAULT_ENCODING,
-    HEADER_LENGHT
+    MAX_SIZE_RECEIVE_DATA
     )
-# from common.utils import (
-#     args_validation,
-#     # get_request,
-#     # generate_request
-#     )
-# from common.decorators import LogInfo
+from common.utils import (
+    args_validation
+    )
+
+from common.decorators import LogInfo
+
+event = threading.Event()
 
 
-# @LogInfo('full')
-@click.command()
-@click.option(
-    "-a",
-    "--addr",
-    type=str,
-    default=DEFAULT_ADDR,
-    help="Server address to connect")
-@click.option(
-    "-p",
-    "--port",
-    default=DEFAULT_PORT,
-    help="Port number for connecting to the server")
-def client_run(addr, port):
-    my_username = input('Username: ')
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock.connect((addr, port))
-    sock.setblocking(False)
+@LogInfo('full')
+def client(addr=DEFAULT_ADDR, port=DEFAULT_PORT):
+    nickname = input('Input your nickname: ')
 
-    username = my_username.encode(DEFAULT_ENCODING)
-    username_header = f'{len(username):<{HEADER_LENGHT}}'.encode(DEFAULT_ENCODING)
-    sock.send(username_header + username)
+    client_socket = socket(AF_INET, SOCK_STREAM)
+    client_socket.connect(args_validation(addr, port))
 
+    send_message_thread = threading.Thread(
+        target=send_message,
+        args=(nickname, client_socket),
+        daemon=True
+        )
+    receive_thread = threading.Thread(
+        target=receive,
+        args=(nickname, client_socket),
+        daemon=True
+        )
+
+    receive_thread.start()
+    send_message_thread.start()
+
+    receive_thread.join()
+    send_message_thread.join()
+
+
+@LogInfo('full')
+def receive(nickname, client_socket):
     while True:
-        message = input(f'{my_username}: ')
-
-        if message:
-            message = message.encode(DEFAULT_ENCODING)
-            message_header = f'{len(message):<{HEADER_LENGHT}}'.encode(DEFAULT_ENCODING)
-            sock.send(message_header+message)
-
         try:
-            while True:
-                username_header = sock.recv(HEADER_LENGHT)
-                if not len(username_header):
-                    print('Connection closed by the server')
-                    sys.exit(1)
+            message = client_socket.recv(MAX_SIZE_RECEIVE_DATA).decode(DEFAULT_ENCODING)
+            if message == 'GET_NICK':
+                client_socket.send(nickname.encode(DEFAULT_ENCODING))
+            else:
+                print(message)
+                event.set()
+                # event.clear()
+        except Exception:
+            print('An error occured!')
+            client_socket.close()
+            break
 
-                username_lenght = int(username_header.decode(DEFAULT_ENCODING).strip())
-                
-                username = sock.recv(username_lenght).decode(DEFAULT_ENCODING)
-                print(username)
 
-                message_header = sock.recv(HEADER_LENGHT)
-                message_lenght = int(
-                    message_header.decode(DEFAULT_ENCODING).strip()
-                    )
-                message = sock.recv(message_lenght).decode(DEFAULT_ENCODING)
-
-                print(f'{username}: {message}')
-
-        except IOError as e:
-            if e.errno != errno.EAGAIN and e.errno != errno.EWOULDBLOCK:
-                print('Error: ', str(e))
-                sys.exit(1)
-            continue
-
-        except Exception as e:
-            print('Error', str(e))
-            sys.exit(1)
-            pass
+@LogInfo('full')
+def send_message(nickname, client_socket):
+    event.wait()
+    while True:
+        # event.wait()
+        # message = f'{nickname}: {input(nickname+": ")}'
+        # message = f'{nickname}: {input()}'
+        message = f'{input()}'
+        client_socket.send(message.encode(DEFAULT_ENCODING))
 
 
 if __name__ == '__main__':
-    client_run()
+    client()
