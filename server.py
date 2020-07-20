@@ -1,5 +1,4 @@
 import selectors
-# import argparse
 from socket import (
     socket,
     AF_INET,
@@ -15,7 +14,8 @@ from common.variables import (
     DEFAULT_PORT
     )
 from common.utils import (
-    args_validation
+    args_validation,
+    get_args
     )
 from common.decorators import LogInfo
 
@@ -27,7 +27,7 @@ class Server:
     selector = selectors.DefaultSelector()
 
     @LogInfo('full')
-    def __init__(self, addr=DEFAULT_ADDR, port=DEFAULT_PORT):
+    def __init__(self, addr, port):
         self.server_socket.setsockopt(
             SOL_SOCKET,
             SO_REUSEADDR,
@@ -84,10 +84,10 @@ class Server:
             self.selector.unregister(client_socket)
             client_socket.close()
 
-
     @LogInfo('full')
     def broadcast(self, message, client_socket):
         message_command = message.split()[1]
+
         if message_command in self.clients.values():
             for client, name in self.clients.items():
                 if name == message_command:
@@ -100,7 +100,6 @@ class Server:
             for client in self.clients:
                 client.send(message.encode(DEFAULT_ENCODING))
 
-
     @LogInfo('full')
     def event_loop(self):
         while True:
@@ -112,5 +111,6 @@ class Server:
 
 
 if __name__ == '__main__':
-    server = Server('localhost', 7777)
+    addr, port = get_args()
+    server = Server(addr, port)
     server.event_loop()
