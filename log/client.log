@@ -1073,3 +1073,11 @@ EOFError
 2020-07-21 16:31:40,911 - INFO - decorators:wrapper:31 - ()- MainThread - The "args_validation" function is called from the module -> client.py -> function:client = Client(addr, port) !!!
 2020-07-21 16:31:40,919 - INFO - decorators:wrapper:31 - ()- Thread-2 - The "receive" function is called from the module -> /home/device/.pyenv/versions/3.7.0/lib/python3.7/threading.py -> function:self._bootstrap_inner() !!!
 2020-07-21 16:31:40,921 - INFO - decorators:wrapper:31 - ()- Thread-1 - The "send_message" function is called from the module -> /home/device/.pyenv/versions/3.7.0/lib/python3.7/threading.py -> function:self._bootstrap_inner() !!!
+2020-07-21 16:36:27,335 - INFO - decorators:wrapper:31 - ()- MainThread - The "__init__" function is called from the module -> client.py -> function:client = Client(addr, port) !!!
+2020-07-21 16:36:28,640 - INFO - decorators:wrapper:31 - ()- MainThread - The "args_validation" function is called from the module -> client.py -> function:client = Client(addr, port) !!!
+2020-07-21 16:36:28,650 - INFO - decorators:wrapper:31 - ()- Thread-2 - The "receive" function is called from the module -> /home/device/.pyenv/versions/3.7.0/lib/python3.7/threading.py -> function:self._bootstrap_inner() !!!
+2020-07-21 16:36:28,657 - INFO - decorators:wrapper:31 - ()- Thread-1 - The "send_message" function is called from the module -> /home/device/.pyenv/versions/3.7.0/lib/python3.7/threading.py -> function:self._bootstrap_inner() !!!
+2020-07-21 16:36:54,123 - INFO - decorators:wrapper:31 - ()- MainThread - The "__init__" function is called from the module -> client.py -> function:client = Client(addr, port) !!!
+2020-07-21 16:36:55,369 - INFO - decorators:wrapper:31 - ()- MainThread - The "args_validation" function is called from the module -> client.py -> function:client = Client(addr, port) !!!
+2020-07-21 16:36:55,380 - INFO - decorators:wrapper:31 - ()- Thread-1 - The "send_message" function is called from the module -> /home/device/.pyenv/versions/3.7.0/lib/python3.7/threading.py -> function:self._bootstrap_inner() !!!
+2020-07-21 16:36:55,380 - INFO - decorators:wrapper:31 - ()- Thread-2 - The "receive" function is called from the module -> /home/device/.pyenv/versions/3.7.0/lib/python3.7/threading.py -> function:self._bootstrap_inner() !!!

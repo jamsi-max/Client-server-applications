@@ -86,7 +86,6 @@ class Server:
 
     @LogInfo('full')
     def broadcast(self, message, client_socket):
-        # message_prefix = message.split()[1]
         message_prefix = message.split()
 
         if message_prefix[1] in self.clients.values():
